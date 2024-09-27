@@ -7,17 +7,17 @@ use Services\Database;
 use Services\EmailNotifier;
 use Services\PageMonitor;
 
-// Inicjalizacja konfiguracji
+// Initialize configuration
 $dbConfig = Config::getDbConfig();
 $fromEmail = Config::getFromEmail();
 
-// Tworzenie instancji serwisów
+// Create instances of services
 $db = new Database($dbConfig);
 $admins = $db->getAdmins();
 $emailNotifier = new EmailNotifier($admins, $fromEmail);
 
-// Monitorowanie stron
+// Monitor websites
 $pageMonitor = new PageMonitor($db, $emailNotifier);
 $pageMonitor->monitor();
 
-echo "Monitoring zakończony.";
+echo "Monitoring completed.";
